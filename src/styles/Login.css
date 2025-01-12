@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-body {
+.fondo {
     font-family: 'Poppins', 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -100,4 +100,9 @@ input-box input::placeholder{
 
 .register-link p a:hover{
     text-decoration: underline;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
 }

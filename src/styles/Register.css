@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-body {
+.fondo {
     font-family: 'Poppins', 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

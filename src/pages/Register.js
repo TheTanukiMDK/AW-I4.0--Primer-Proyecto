@@ -4,6 +4,7 @@ import '../styles/Register.css'
 
 function Register() {
     return (
+        <body className='fondo'>
         <div className='wrapper'>
             <form action="">
                 <h1>Registro</h1>
@@ -23,6 +24,7 @@ function Register() {
                 </div>
             </form>
         </div>
+    </body>
     )
 }
 

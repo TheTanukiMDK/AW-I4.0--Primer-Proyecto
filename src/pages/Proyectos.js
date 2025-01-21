@@ -115,10 +115,11 @@ function Proyectos() {
                         
                         <div className="form-group">
                             <label>Estatus</label>
-                            <input
-                                type="text"
-                                placeholder="Estatus"
-                            />
+                            <select>
+                              <option>
+                                En desarrollo
+                              </option>
+                            </select>
                         </div>
                         
                         <div className="form-group">

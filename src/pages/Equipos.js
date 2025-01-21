@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import "../styles/Dashboard.css";
-import "../styles/Proyectos.css"
+import "../styles/Equipos.css"
 import { BsTrash } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import ModalAddProyectos from '../components/ModalAddEquipos';
@@ -22,14 +22,15 @@ function Equipos() {
             <Sidebar />
             <main className="main-content">
                 <header className="header">
-                    <h1>Todos los proyectos</h1>
+                    <h1>Lista de equipos</h1>
                 </header>
                 <div className='button-container'>
-                    <button className='button-proyects' onClick={openModal}>Nuevo Proyecto</button>
+                    <a className='button-proyects' href='/Miembros'>Ver Miembros</a>
+                    <button className='button-proyects' onClick={openModal}>Nuevo Equipo</button>
                 </div>
                 {/*Seccion del modal*/}
                 <ModalAddProyectos isOpen={isModalOpen} onClose={closeModal}>
-                    <h2>Agregar un Nuevo Proyecto</h2>
+                    <h2>Agregar Equipo</h2>
 
                     <form className="form" >
                         <div className="form-group">
@@ -48,7 +49,7 @@ function Equipos() {
                 </ModalAddProyectos>
 
                 <ModalUpdateProyectos isOpen={isModalOpen2} onClose={closeModal2}>
-                    <h2>Actualizar el proyecto</h2>
+                    <h2>Actualizar el Equipo</h2>
 
                     <form className="form" >
                         <div className="form-group">
@@ -58,7 +59,7 @@ function Equipos() {
                                 placeholder="Ingresa un nombre"
                             />
                         </div>
-                      
+
 
                         <button type="submit" className="form-button" onClick={closeModal2}>
                             Enviar

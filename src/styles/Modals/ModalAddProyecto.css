@@ -64,7 +64,7 @@
     display: block;
   }
   
-  .form-group input,
+  .form-group select,input,
   .form-group textarea {
     width: 100%;
     padding: 10px;
@@ -75,7 +75,7 @@
     outline: none;
   }
   
-  .form-group input:focus,
+  .form-group select,input:focus,
   .form-group textarea:focus {
     border-color: #4caf50;
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);

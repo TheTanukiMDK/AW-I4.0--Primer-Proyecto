@@ -8,6 +8,7 @@ import Miembros from "../pages/Miembros";
 import Recursos from "../pages/Recursos";
 import Uso_Recursos from "../pages/Uso_Recursos";
 import Cronograma from "../pages/Cronograma"
+import ProtectedRoute from "../components/ProtectedRoute";
 
 export const rutas = createBrowserRouter([
     {
@@ -20,30 +21,58 @@ export const rutas = createBrowserRouter([
     },
     {
         path: "/Dashboard",
-        element: <DashBoard></DashBoard>
+        element: (
+            <ProtectedRoute>
+                <DashBoard />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/Proyectos",
-        element: <Proyectos></Proyectos>
+        element: (
+            <ProtectedRoute>
+                <Proyectos />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/Equipos",
-        element: <Equipos></Equipos>
+        element: (
+            <ProtectedRoute>
+                <Equipos />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/Miembros",
-        element: <Miembros></Miembros>
+        element: (
+            <ProtectedRoute>
+                <Miembros />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/Recursos",
-        element: <Recursos></Recursos>
+        element: (
+            <ProtectedRoute>
+                <Recursos />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/UsoRecursos",
-        element: <Uso_Recursos></Uso_Recursos>
+        element: (
+            <ProtectedRoute>
+                <Uso_Recursos />
+            </ProtectedRoute>
+        )
     },
     {
         path: "/Cronograma",
-        element: <Cronograma></Cronograma>
+        element: (
+            <ProtectedRoute>
+                <Cronograma />
+            </ProtectedRoute>
+        )
     }
 ])

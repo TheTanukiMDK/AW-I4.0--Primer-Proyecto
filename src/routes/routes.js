@@ -9,15 +9,24 @@ import Recursos from "../pages/Recursos";
 import Uso_Recursos from "../pages/Uso_Recursos";
 import Cronograma from "../pages/Cronograma"
 import ProtectedRoute from "../components/ProtectedRoute";
+import PublicRoute from "../components/PublicRoute";
 
 export const rutas = createBrowserRouter([
     {
         path: "/",
-        element: <Login></Login>
+        element: (
+            <PublicRoute>
+                <Login />
+            </PublicRoute>
+        )
     },
     {
         path: "/Registro",
-        element: <Register></Register>
+        element: (
+            <PublicRoute>
+                <Register />
+            </PublicRoute>
+        )
     },
     {
         path: "/Dashboard",

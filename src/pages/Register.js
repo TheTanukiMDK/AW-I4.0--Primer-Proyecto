@@ -1,4 +1,3 @@
-// components/Register.js
 import React, { useState } from 'react';
 import '../styles/Register.css';
 
@@ -7,8 +6,34 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const validatePassword = (password) => {
+        const re = /^[A-Za-z0-9!@#$%^&*()_+=-]*$/;
+        return re.test(String(password)) && password.length >= 8;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!email || !password || !confirmPassword) {
+            alert('Por favor, rellena todos los campos');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert('Correo electrónico no válido');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            alert('La contraseña debe tener al menos 8 caracteres y solo puede contener letras, números y caracteres especiales !@#$%^&*()_+=-');
+            return;
+        }
+
         if (password !== confirmPassword) {
             alert('Las contraseñas no coinciden');
             return;
@@ -37,13 +62,28 @@ function Register() {
                 <form onSubmit={handleSubmit}>
                     <h1>Registro</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Ingresa correo electronico' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input
+                            type='text'
+                            placeholder='Ingresa correo electronico'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Ingresa contraseña' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input
+                            type='password'
+                            placeholder='Ingresa contraseña'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Confirmar contraseña' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <input
+                            type='password'
+                            placeholder='Confirmar contraseña'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
                     </div>
                     <button type='submit'>Registrar</button>
 

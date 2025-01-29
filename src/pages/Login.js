@@ -1,3 +1,4 @@
+// components/Login.js
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { useNavigate } from 'react-router';
@@ -26,9 +27,16 @@ function Login() {
 
         const data = await res.json();
         if (res.ok) {
-            // Guardar el token en el almacenamiento local
+            // Guardar el token y el rol en el almacenamiento local
             localStorage.setItem('token', data.token);
-            navigate('/Dashboard');
+            localStorage.setItem('role', data.role);
+
+            // Redirigir según el rol del usuario
+            if (data.role === 'admin') {
+                navigate('/DashboardAdmin');
+            } else {
+                navigate('/Dashboard');
+            }
         } else {
             alert(data.message);
         }

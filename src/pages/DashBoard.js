@@ -24,20 +24,20 @@ const Dashboard = () => {
                 </header>
                 <section className="content">
                     <div className="card">
-                        <h3>Usuarios Totales</h3>
-                        <p>91,10230</p>
+                        <h3>Equipos totales</h3>
+                        <p>200</p>
                     </div>
                     <div className="card">
-                        <h3>Usuarios Activos</h3>
-                        <p>31,2913</p>
+                        <h3>Proyectos activos</h3>
+                        <p>9000</p>
                     </div>
                     <div className="card">
-                        <h3>Usuarios Activos los últimos 7 días</h3>
-                        <p>17,2321</p>
+                        <h3>Proyectos terminados</h3>
+                        <p>4521</p>
                     </div>
                 </section>
                 <section className="chart-section">
-                    <h2>Calendario</h2>
+                    <h2>Calendario de actividades</h2>
                     <FullCalendar
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"

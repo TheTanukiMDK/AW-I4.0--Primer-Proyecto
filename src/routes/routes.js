@@ -10,6 +10,9 @@ import Uso_Recursos from "../pages/Uso_Recursos";
 import Cronograma from "../pages/Cronograma"
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
+import DashboardAdmin from "../pages/Admin/DashboardAdmin";
+import ProtectedAdminRoute from "../components/ProtectedAdminRoute";
+import ProtectedUserRoute from "../components/ProtectedUserRoute";
 
 export const rutas = createBrowserRouter([
     {
@@ -31,9 +34,19 @@ export const rutas = createBrowserRouter([
     {
         path: "/Dashboard",
         element: (
-            <ProtectedRoute>
+            <ProtectedUserRoute>
                 <DashBoard />
-            </ProtectedRoute>
+            </ProtectedUserRoute>
+        )
+    },
+
+    {
+        path: "/DashboardAdmin",
+        element: (
+            <ProtectedAdminRoute>
+                <DashboardAdmin />
+            </ProtectedAdminRoute>
+
         )
     },
     {

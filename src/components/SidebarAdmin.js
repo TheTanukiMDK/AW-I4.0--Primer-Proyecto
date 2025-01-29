@@ -19,10 +19,10 @@ const Sidebar = () => {
             <nav>
                 <ul>
                     <li><a className="button" href="/Dashboard">Dashboard</a></li>
+                    <li><a className="button" href="/Proyectos">Empleados</a></li>
                     <li><a className="button" href="/Proyectos">Proyectos</a></li>
                     <li><a className="button" href="/Equipos">Equipos</a></li>
                     <li><a className="button" href="/Recursos">Recursos</a></li>
-                    <li><a className="button" href="/Cronograma">Cronograma</a></li>
                     <li><button className="Cerrar-Sesion" onClick={handleLogout}>Cerrar sesión</button></li>
                 </ul>
             </nav>

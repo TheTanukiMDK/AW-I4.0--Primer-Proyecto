@@ -1,82 +1,54 @@
-import React, { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
-import "../styles/Dashboard.css"; // Ruta actualizada
+import React from "react";
+import "../styles/Dashboard.css";
 import { FaRegCircleUser } from "react-icons/fa6";
-import SidebarAdmin from "../components/SidebarAdmin"; // Ruta actualizada
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import Sidebar from "../components/Sidebar";
 
-const DashboardAdmin = () => {
-    const chartRef = useRef(null); // Referencia al canvas
 
-    useEffect(() => {
-        const ctx = chartRef.current.getContext("2d");
-        let chartInstance; // Guardar la instancia del gráfico
-        const data = {
-            labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
-            datasets: [
-                {
-                    label: "Ingresos",
-                    data: [120, 190, 300, 250, 220, 340, 400],
-                    backgroundColor: "#B4FFA5",
-                    borderColor: "#B4FFA5",
-                    borderWidth: 1,
-                },
-            ],
-        };
-        const config = {
-            type: "bar",
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                    },
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-            },
-        };
-        // Crear el gráfico
-        chartInstance = new Chart(ctx, config);
-        // Limpiar el gráfico al desmontar el componente
-        return () => {
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-        };
-    }, []); // Se ejecuta una vez al montar el componente
+const Dashboard = () => {
+    const events = [
+        { title: "Reunión de equipo", start: "2025-01-22T10:00:00", end: "2025-01-22T11:00:00" },
+        { title: "Entrega de proyecto", start: "2025-01-25" },
+        { title: "Día de descanso", start: "2025-01-28" },
+    ];
 
     return (
         <div className="dashboard">
-            <SidebarAdmin />
+            <Sidebar />
             <main className="main-content">
                 <header className="header">
-                    <h1>Bienvenido Administrador</h1>
+                    <h1>Bienvenido de nuevo</h1>
                 </header>
                 <section className="content">
                     <div className="card">
-                        <h3>Empleados totales</h3>
-                        <p>91,10230</p>
+                        <h3>Equipos totales</h3>
+                        <p>200</p>
                     </div>
                     <div className="card">
-                        <h3>Ingresos totales</h3>
-                        <p>$ 51,2913</p>
+                        <h3>Proyectos activos</h3>
+                        <p>9000</p>
                     </div>
                     <div className="card">
-                        <h3>Ingresos ultimos 3 meses</h3>
-                        <p>$ 10,2321</p>
+                        <h3>Proyectos terminados</h3>
+                        <p>4521</p>
                     </div>
                 </section>
                 <section className="chart-section">
-                    <h2>Ingresos semanales</h2>
-                    <canvas id="myChart" ref={chartRef} width="80" height="40"></canvas>
+                    <h2>Calendario de actividades</h2>
+                    <FullCalendar
+                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                        initialView="dayGridMonth"
+                        events={events}
+                        selectable={true}
+                        editable={true}
+                    />
                 </section>
             </main>
         </div>
     );
 };
 
-export default DashboardAdmin;
+export default Dashboard;

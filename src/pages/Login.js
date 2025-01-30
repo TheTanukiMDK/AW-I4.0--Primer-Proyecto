@@ -96,11 +96,6 @@ function Login() {
                         />
                     </div>
                     <button type='submit'>Ingresar</button>
-
-                    <div className='register-link'>
-                        <p>¿No tienes cuenta? <a href='/Registro'>Regístrate</a></p> {/* Cambiar el href a '/Registro' */}
-                    </div>
-
                     <GoogleOAuthProvider clientId="628372787749-0g10ignu8s0fkq1715side4fetaosno0.apps.googleusercontent.com">
                         <GoogleLogin
                             onSuccess={responseGoogle}
@@ -109,6 +104,12 @@ function Login() {
                             }}
                         />
                     </GoogleOAuthProvider>
+
+                    <div className='register-link'>
+                        <p>¿No tienes cuenta? <a href='/Registro'>Regístrate</a></p> {/* Cambiar el href a '/Registro' */}
+                    </div>
+
+                   
                 </form>
             </div>
         </div>

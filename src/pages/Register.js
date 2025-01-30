@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Register.css';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'; // Importación nombrada para jwtDecode
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -39,20 +41,52 @@ function Register() {
             return;
         }
 
-        const res = await fetch('http://localhost:3000/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
+        try {
+            const res = await fetch('http://localhost:3000/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
-        const data = await res.json();
-        if (res.ok) {
-            alert('Usuario registrado con éxito');
-            window.location.href = '/';
-        } else {
-            alert(data.message);
+            const data = await res.json();
+            if (res.ok) {
+                alert('Usuario registrado con éxito');
+                window.location.href = '/';
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Error al registrar:', error);
+        }
+    };
+
+    const responseGoogle = async (response) => {
+        const decoded = jwtDecode(response.credential);
+        console.log(decoded);
+
+        try {
+            const res = await fetch('http://localhost:3000/api/google-auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: response.credential }),
+            });
+
+            const data = await res.json();
+            console.log(data);
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('role', data.role);
+
+            if (data.role === 'admin') {
+                window.location.href = '/DashboardAdmin';
+            } else {
+                window.location.href = '/Dashboard';
+            }
+        } catch (error) {
+            console.error('Error durante la autenticación de Google:', error);
         }
     };
 
@@ -87,8 +121,17 @@ function Register() {
                     </div>
                     <button type='submit'>Registrar</button>
 
+                    <GoogleOAuthProvider clientId="628372787749-0g10ignu8s0fkq1715side4fetaosno0.apps.googleusercontent.com">
+                        <GoogleLogin
+                            onSuccess={responseGoogle}
+                            onError={() => {
+                                console.log('Registro fallido con Google');
+                            }}
+                        />
+                    </GoogleOAuthProvider>
+
                     <div className='register-link'>
-                        <p>¿Ya tienes cuenta? <a href='/'>Inicia sesion</a></p>
+                        <p>¿Ya tienes cuenta? <a href='/'>Inicia sesión</a></p>
                     </div>
                 </form>
             </div>

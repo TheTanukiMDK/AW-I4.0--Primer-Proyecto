@@ -1,15 +1,20 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+// components/ProtectedRoute.js
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem("token"); // Verifica si el token existe
+const ProtectedRoute = ({ children, allowedRoles }) => {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    console.log(role); // Verificamos el valor del rol almacenado
+    console.log('Token:', token);  // Verificamos token
 
     if (!token) {
-        // Si no hay token, redirige al inicio de sesión
-        return <Navigate to="/" replace />;
+        return <Navigate to="/" replace />; // Redirige al login si no hay token
     }
 
-    // Si hay token, renderiza el contenido protegido
+    if (allowedRoles && !allowedRoles.includes(role)) {
+        return <Navigate to="/" replace />; // Redirige si el rol no está permitido
+    }
+
     return children;
 };
 

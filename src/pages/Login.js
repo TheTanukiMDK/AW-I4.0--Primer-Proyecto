@@ -1,17 +1,23 @@
-// components/Login.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
 import { useNavigate } from 'react-router';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        // Limpiar cualquier token antiguo
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+    }, []); // Dependencias vacías para ejecutar solo una vez
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verificar si los campos están vacíos o contienen solo espacios
         if (!email.trim() || !password.trim()) {
             alert('Por favor, rellena todos los campos sin espacios en blanco');
             return;
@@ -27,11 +33,9 @@ function Login() {
 
         const data = await res.json();
         if (res.ok) {
-            // Guardar el token y el rol en el almacenamiento local
             localStorage.setItem('token', data.token);
             localStorage.setItem('role', data.role);
 
-            // Redirigir según el rol del usuario
             if (data.role === 'admin') {
                 navigate('/DashboardAdmin');
             } else {
@@ -40,6 +44,32 @@ function Login() {
         } else {
             alert(data.message);
         }
+    };
+
+    const responseGoogle = (response) => {
+        const decoded = jwtDecode(response.credential);
+        console.log(decoded);
+
+        fetch('http://localhost:3000/api/google-auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: response.credential }),
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('role', data.role);
+
+            if (data.role === 'admin') {
+                navigate('/DashboardAdmin');
+            } else {
+                navigate('/Dashboard');
+            }
+        })
+        .catch(err => console.error(err));
     };
 
     return (
@@ -68,8 +98,17 @@ function Login() {
                     <button type='submit'>Ingresar</button>
 
                     <div className='register-link'>
-                        <p>¿No tienes cuenta? <a href='/Registro'>Regístrate</a></p>
+                        <p>¿No tienes cuenta? <a href='/Registro'>Regístrate</a></p> {/* Cambiar el href a '/Registro' */}
                     </div>
+
+                    <GoogleOAuthProvider clientId="628372787749-0g10ignu8s0fkq1715side4fetaosno0.apps.googleusercontent.com">
+                        <GoogleLogin
+                            onSuccess={responseGoogle}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
+                    </GoogleOAuthProvider>
                 </form>
             </div>
         </div>

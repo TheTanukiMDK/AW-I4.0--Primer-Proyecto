@@ -7,7 +7,7 @@ import Equipos from "../pages/Equipos";
 import Miembros from "../pages/Miembros";
 import Recursos from "../pages/Recursos";
 import Uso_Recursos from "../pages/Uso_Recursos";
-import Cronograma from "../pages/Cronograma"
+import Cronograma from "../pages/Cronograma";
 import ProtectedRoute from "../components/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute";
 import DashboardAdmin from "../pages/Admin/DashboardAdmin";
@@ -39,14 +39,12 @@ export const rutas = createBrowserRouter([
             </ProtectedUserRoute>
         )
     },
-
     {
         path: "/DashboardAdmin",
         element: (
             <ProtectedAdminRoute>
                 <DashboardAdmin />
             </ProtectedAdminRoute>
-
         )
     },
     {
@@ -97,4 +95,4 @@ export const rutas = createBrowserRouter([
             </ProtectedRoute>
         )
     }
-])
+]);

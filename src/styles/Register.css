@@ -68,7 +68,7 @@ input-box input::placeholder{
     font-size: 16px;
 }*/
 
-.wrapper button{
+.wrapper .button-1{
     width: 100%;
     height: 45px;
     background: #B4FFA5;
@@ -82,7 +82,7 @@ input-box input::placeholder{
     font-weight: 700;
 }
 
-.wrapper button:hover{
+.wrapper .button-1:hover{
     background: #136d01;
 }
 

@@ -1,12 +1,33 @@
-// components/Login.js
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { useNavigate } from 'react-router';
+import { auth, provider, signInWithPopup } from '../database/firebaseConfig';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // Aquí puedes manejar la información del usuario (user)
+            // y redirigir según tus necesidades, por ejemplo:
+            if (user) {
+                // Guardar el token y el rol en el almacenamiento local
+                localStorage.setItem('token', await user.getIdToken());
+                localStorage.setItem('role', 'user'); // Ajusta esto según tu lógica de roles
+
+                // Redirigir al dashboard
+                navigate('/Dashboard');
+            }
+        } catch (error) {
+            console.error("Error al iniciar sesión con Google:", error);
+            alert("Error al iniciar sesión con Google");
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,7 +86,10 @@ function Login() {
                             required
                         />
                     </div>
-                    <button type='submit'>Ingresar</button>
+                    <button className='button-1' type='submit'>Ingresar</button>
+                    <button className='google-btn' type='button' onClick={handleGoogleLogin}>
+                        Iniciar sesión con Google
+                    </button>
 
                     <div className='register-link'>
                         <p>¿No tienes cuenta? <a href='/Registro'>Regístrate</a></p>

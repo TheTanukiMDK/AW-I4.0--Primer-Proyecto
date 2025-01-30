@@ -68,7 +68,7 @@ input-box input::placeholder{
     font-size: 16px;
 }*/
 
-.wrapper button{
+.wrapper .button-1{
     width: 100%;
     height: 45px;
     background: #B4FFA5;
@@ -82,8 +82,27 @@ input-box input::placeholder{
     font-weight: 700;
 }
 
-.wrapper button:hover{
+.wrapper .button-1:hover{
     background: #136d01;
+}
+
+.google-btn{
+    width: 100%;
+    height: 45px;
+    margin-top: 25px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    outline: none;
+    border-radius:40px ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+}
+
+.google-btn:hover{
+    background: rgba(145, 145, 145, 0.274) ;
 }
 
 .wrapper .register-link{
